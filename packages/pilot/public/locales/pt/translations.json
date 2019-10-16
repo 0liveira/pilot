@@ -66,6 +66,7 @@
   "invalid_recipient": "Recebedor inválido",
   "items_per_page_plural": "{{count}} itens por página",
   "items_per_page": "{{count}} item por página",
+  "loading": "Carregando...",
   "of": "de",
   "password": "Senha",
   "password_confirm": "Confirmar senha",
