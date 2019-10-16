@@ -171,24 +171,37 @@ const getDefaultColumns = ({
           tv={6}
         >
           <Row>
-            {data.transfer_day !== 0 && data.transfer_interval === 'weekly'
-            && columnData([
+            {columnData([
               {
                 content: t(`pages.recipients.transfer_enabled_boolean.${data.transfer_enabled}`),
                 title: t('pages.recipients.transfer_enabled'),
               },
+            ])
+            }
+            {data.transfer_enabled && data.transfer_day !== 0 && data.transfer_interval === 'weekly'
+            && columnData([
               {
                 content: t(`pages.recipients.transfer_interval_of.${data.transfer_interval}`),
                 title: t('pages.recipients.transfer_interval'),
               },
               renderColumnTransferDay(data, t),
-            ])}
-            {data.transfer_day === 0
+            ])
+            }
+            {data.transfer_enabled && data.transfer_day !== 0 && data.transfer_interval === 'monthly'
             && columnData([
               {
-                content: t(`pages.recipients.transfer_enabled_boolean.${data.transfer_enabled}`),
-                title: t('pages.recipients.transfer_enabled'),
-              }, {
+                content: t(`pages.recipients.transfer_interval_of.${data.transfer_interval}`),
+                title: t('pages.recipients.transfer_interval'),
+              },
+              {
+                content: data.transfer_day,
+                title: t('pages.recipients.transfer_day'),
+              },
+            ])
+            }
+            {data.transfer_enabled && data.transfer_day === 0
+            && columnData([
+              {
                 content: t(`pages.recipients.transfer_interval_of.${data.transfer_interval}`),
                 title: t('pages.recipients.transfer_interval'),
               },
