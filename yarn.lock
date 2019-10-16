@@ -468,7 +468,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-syntax-dynamic-import@^7.2.0":
+"@babel/plugin-syntax-dynamic-import@7.2.0", "@babel/plugin-syntax-dynamic-import@^7.2.0":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-dynamic-import/-/plugin-syntax-dynamic-import-7.2.0.tgz#69c159ffaf4998122161ad8ebc5e6d1f55df8612"
   integrity sha512-mVxuJ0YroI/h/tbFTPGZR8cv6ai+STMKNBq0f8hFxsxWjl94qqhsb+wXbpNMDPU3cfR1TIsVFzU3nXyZMqyK4w==
@@ -12433,12 +12433,13 @@ react-router@^4.3.1:
     prop-types "^15.6.1"
     warning "^4.0.1"
 
-react-scripts-former-kit-dashboard@2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/react-scripts-former-kit-dashboard/-/react-scripts-former-kit-dashboard-2.0.3.tgz#144bd79e1992373cebf93210fde03cb6900c75fb"
-  integrity sha512-lMSsQQ6MQxxGTXdWJei1Sn+Xn+Lbxq2FRo9QqcJ9MY23+tC8xQ6/KljhMWaFkdpzz10uGvUVDZwpkAi8htXDdw==
+react-scripts-former-kit-dashboard@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-scripts-former-kit-dashboard/-/react-scripts-former-kit-dashboard-2.1.0.tgz#4c63cc5283f585b0501e15a443fae4ef1e6b9ff4"
+  integrity sha512-qtGK9aFKdFfc4D6IbUZGQ8u8Ps3Fx799B1/p15sxBJQvoDfuof+pMrvvdO9Odf9wqSBTnQK4OxXlunZsQMpQ2A==
   dependencies:
     "@babel/core" "7.5.5"
+    "@babel/plugin-syntax-dynamic-import" "7.2.0"
     "@babel/plugin-transform-react-constant-elements" "7.5.0"
     "@babel/preset-env" "7.5.5"
     "@babel/preset-react" "7.0.0"
