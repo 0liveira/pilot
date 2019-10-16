@@ -1,12 +1,22 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import {
   Route,
   Switch,
 } from 'react-router-dom'
 
-import search, { RecipientsSearch } from './Search'
-import RecipientsAdd from './Add'
-import RecipientDetail from './Detail'
+import search from './Search'
+
+const RecipientsSearch = lazy(() => import(
+  /* webpackChunkName: "recipients" */ './Search/Search'
+))
+
+const RecipientDetail = lazy(() => import(
+  /* webpackChunkName: "recipient-detail" */ './Detail'
+))
+
+const RecipientsAdd = lazy(() => import(
+  /* webpackChunkName: "recipient-add" */ './Add'
+))
 
 export const reducers = {
   search,

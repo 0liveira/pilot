@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { isValidElement } from 'react'
 import PropTypes from 'prop-types'
 import {
   propOr,
@@ -220,7 +220,7 @@ SidebarContainer.propTypes = {
   companyName: PropTypes.string,
   links: PropTypes.arrayOf(PropTypes.shape({
     active: PropTypes.bool,
-    component: PropTypes.func,
+    component: isValidElement,
     icon: PropTypes.func,
     path: PropTypes.string,
     title: PropTypes.string,

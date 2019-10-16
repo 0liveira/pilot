@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, isValidElement } from 'react'
 import PropTypes from 'prop-types'
 import {
   HashRouter,
@@ -165,7 +165,7 @@ HeaderContainer.propTypes = {
   onLogout: PropTypes.func.isRequired,
   onSettings: PropTypes.func.isRequired,
   routes: PropTypes.arrayOf(PropTypes.shape({
-    component: PropTypes.func,
+    component: isValidElement,
     exact: PropTypes.bool,
     path: PropTypes.string,
     title: PropTypes.string,

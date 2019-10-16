@@ -1,5 +1,4 @@
 export { default } from './reducer'
-export { default as Anticipation } from './Anticipation'
 export {
   receiveLimits,
   requestLimits,

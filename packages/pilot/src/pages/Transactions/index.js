@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import {
   Route,
   Switch,
 } from 'react-router-dom'
 
-import details, { TransactionDetails } from './Details'
-import search, { TransactionsSearch } from './Search'
+import details from './Details'
+import search from './Search'
+
+const TransactionDetails = lazy(() => import(
+  /* webpackChunkName: "transaction-details" */ './Details/Details'
+))
+
+const TransactionsSearch = lazy(() => import(
+  /* webpackChunkName: "transactions" */ './Search/Search'
+))
 
 export const reducers = {
   details,

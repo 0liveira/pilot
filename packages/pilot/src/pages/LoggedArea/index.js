@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import PropTypes from 'prop-types'
 import {
   Redirect,
@@ -14,10 +14,13 @@ import {
   path,
 } from 'ramda'
 import { Layout } from 'former-kit'
-import env from '../../environment'
+
 import { ErrorBoundary } from '../ErrorBoundary'
 import Sidebar from './Sidebar'
 import Header from './Header'
+import Loader from '../../components/Loader'
+
+import env from '../../environment'
 import routes from './routes'
 
 // This block of code is commented because of issue #1159 (https://github.com/pagarme/pilot/issues/1159)
@@ -86,16 +89,25 @@ const LoggedArea = ({
     header={<Header t={t} />}
   >
     <ErrorBoundary>
-      <Switch>
-        {Object.values(routes).map(({ component, path: pathURI }) => (
-          <Route
-            key={pathURI}
-            path={pathURI}
-            component={component}
+      <Suspense
+        fallback={(
+          <Loader
+            text={t('loading')}
+            visible
           />
-        ))}
-        <Redirect to="/home" />
-      </Switch>
+        )}
+      >
+        <Switch>
+          {Object.values(routes).map(({ component, path: pathURI }) => (
+            <Route
+              key={pathURI}
+              path={pathURI}
+              component={component}
+            />
+          ))}
+          <Redirect to="/home" />
+        </Switch>
+      </Suspense>
     </ErrorBoundary>
   </Layout>
 )

@@ -1,5 +1,4 @@
 export { default } from './reducer'
-export { default as Home } from './Home'
 export {
   failMetrics,
   receiveMetrics,

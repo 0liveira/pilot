@@ -1,3 +1,4 @@
+import { lazy } from 'react'
 import Balance32 from 'emblematic-icons/svg/Extract32.svg'
 import Configuration32 from 'emblematic-icons/svg/Configuration32.svg'
 import Home32 from 'emblematic-icons/svg/Home32.svg'
@@ -5,14 +6,37 @@ import Transaction32 from 'emblematic-icons/svg/Transaction32.svg'
 import Withdraw32 from 'emblematic-icons/svg/Withdraw32.svg'
 import Store32 from 'emblematic-icons/svg/Store32.svg'
 
-import { Balance } from '../Balance'
-import { Anticipation } from '../Anticipation'
-import { Home } from '../Home'
-import CompanySettings from '../CompanySettings'
-import Transactions from '../Transactions'
-import UserSettings from '../UserSettings'
-import Withdraw from '../Withdraw'
-import Recipients from '../Recipients'
+const UserSettings = lazy(() => import(
+  /* webpackChunkName: "user-settings" */ '../UserSettings'
+))
+
+const Anticipation = lazy(() => import(
+  /* webpackChunkName: "anticipation" */ '../Anticipation/Anticipation'
+))
+
+const Home = lazy(() => import(
+  /* webpackChunkName: "home" */ '../Home/Home'
+))
+
+const Balance = lazy(() => import(
+  /* webpackChunkName: "balance" */ '../Balance/Balance'
+))
+
+const Transactions = lazy(() => import(
+  /* webpackChunkName: "transactions" */ '../Transactions'
+))
+
+const CompanySettings = lazy(() => import(
+  /* webpackChunkName: "company-settings" */ '../CompanySettings'
+))
+
+const Withdraw = lazy(() => import(
+  /* webpackChunkName: "withdraw" */ '../Withdraw'
+))
+
+const Recipients = lazy(() => import(
+  /* webpackChunkName: "recipients" */ '../Recipients'
+))
 
 /* eslint-disable sort-keys */
 export default {
