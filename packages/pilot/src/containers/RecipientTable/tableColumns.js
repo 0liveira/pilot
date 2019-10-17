@@ -84,6 +84,31 @@ const renderColumnTransferDay = (data, t) => {
   )
 }
 
+const renderTransferColumn = (data, t) => {
+  const rows = [{
+    content: t(`pages.recipients.transfer_enabled_boolean.${data.transfer_enabled}`),
+    title: t('pages.recipients.transfer_enabled'),
+  }]
+
+  if (data.transfer_enabled) {
+    rows.push({
+      content: t(`pages.recipients.transfer_interval_of.${data.transfer_interval}`),
+      title: t('pages.recipients.transfer_interval'),
+    })
+
+    if (data.transfer_interval === 'weekly') {
+      rows.push(renderColumnTransferDay(data, t))
+    } else if (data.transfer_interval === 'monthly') {
+      rows.push({
+        content: data.transfer_day,
+        title: t('pages.recipients.transfer_day'),
+      })
+    }
+  }
+
+  return columnData(rows)
+}
+
 const getDefaultColumns = ({
   onDetailsClick,
   t,
@@ -171,42 +196,7 @@ const getDefaultColumns = ({
           tv={6}
         >
           <Row>
-            {columnData([
-              {
-                content: t(`pages.recipients.transfer_enabled_boolean.${data.transfer_enabled}`),
-                title: t('pages.recipients.transfer_enabled'),
-              },
-            ])
-            }
-            {data.transfer_enabled && data.transfer_day !== 0 && data.transfer_interval === 'weekly'
-            && columnData([
-              {
-                content: t(`pages.recipients.transfer_interval_of.${data.transfer_interval}`),
-                title: t('pages.recipients.transfer_interval'),
-              },
-              renderColumnTransferDay(data, t),
-            ])
-            }
-            {data.transfer_enabled && data.transfer_day !== 0 && data.transfer_interval === 'monthly'
-            && columnData([
-              {
-                content: t(`pages.recipients.transfer_interval_of.${data.transfer_interval}`),
-                title: t('pages.recipients.transfer_interval'),
-              },
-              {
-                content: data.transfer_day,
-                title: t('pages.recipients.transfer_day'),
-              },
-            ])
-            }
-            {data.transfer_enabled && data.transfer_day === 0
-            && columnData([
-              {
-                content: t(`pages.recipients.transfer_interval_of.${data.transfer_interval}`),
-                title: t('pages.recipients.transfer_interval'),
-              },
-            ])
-            }
+            {renderTransferColumn(data, t)}
           </Row>
         </Col>
       </Grid>
