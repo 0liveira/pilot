@@ -4,16 +4,39 @@ import {
   dissoc,
   dissocPath,
   pipe,
+  omit,
 } from 'ramda'
 import cleanTransaction from './cleanTransaction'
 import fromRequest from './mocks/fromRequest.json'
 import toRequest from './mocks/toRequest.json'
 
-const buildCustomerObject = ({ address, phone, customer }) => ({
+const createCustomerObject = ({ address, customer, phone }) => ({
   address,
   phone,
   ...customer,
 })
+
+const removePhoneUnusedProps = pipe(
+  dissocPath(['phone', 'id']),
+  dissocPath(['phone', 'object'])
+)
+
+const removeUnusedCustomerProps = pipe(
+  omit([
+    'born_at',
+    'document_number',
+    'gender',
+  ]),
+  removePhoneUnusedProps
+)
+
+const addDcoumentsProp = assoc('documents', [])
+
+const buildCustomerObject = pipe(
+  createCustomerObject,
+  removeUnusedCustomerProps,
+  addDcoumentsProp
+)
 
 describe('Reprocess', () => {
   it('should work', () => {
@@ -32,17 +55,9 @@ describe('Reprocess', () => {
 
   it('should work when documents is empty', () => {
     const withoutCustomer = assocPath(['customer', 'documents'], [], fromRequest)
-    const customerObject = buildCustomerObject(fromRequest)
 
-    const toRequestExpected = pipe(
-      assoc('customer', customerObject),
-      assocPath(['customer', 'documents'], []),
-      dissocPath(['customer', 'born_at']),
-      dissocPath(['customer', 'document_number']),
-      dissocPath(['customer', 'gender']),
-      dissocPath(['customer', 'phone', 'id']),
-      dissocPath(['customer', 'phone', 'object']),
-    )(toRequest)
+    const customerObject = buildCustomerObject(fromRequest)
+    const toRequestExpected = assoc('customer', customerObject, toRequest)
 
     expect(cleanTransaction(withoutCustomer)).toEqual(toRequestExpected)
   })

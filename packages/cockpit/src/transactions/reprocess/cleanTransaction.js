@@ -2,11 +2,13 @@ import {
   __,
   always,
   applySpec,
+  complement,
   contains,
   curry,
   hasPath,
   ifElse,
   is,
+  isNil,
   lensProp,
   map,
   mapObjIndexed,
@@ -16,6 +18,7 @@ import {
   pathOr,
   pickBy,
   pipe,
+  prop,
   propEq,
   set,
 } from 'ramda'
@@ -49,13 +52,16 @@ const customerBuilder = ifElse(
   buildCustomerObject
 )
 
-const getCustomer = (transaction) => {
-  if (transaction.customer === null) {
-    return null
-  }
+const hasCustomer = pipe(
+  prop('customer'),
+  complement(isNil)
+)
 
-  return customerBuilder(transaction)
-}
+const getCustomer = ifElse(
+  hasCustomer,
+  customerBuilder,
+  always(null)
+)
 
 const ignoredProps = [
   'acquirer_id',
